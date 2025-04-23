@@ -1,0 +1,14 @@
+services:
+  #POSTGRES DATABASE
+  db:
+    # LATEST VERSION OF POSTGRES IMAGE
+    image: postgres:latest
+    # CONFIGURE PORT CONNECTION TO DEFAULT OR 5432
+    ports:
+      - "5433:5432"
+    # SET RESTART BEHAVIOR TO RESTART
+    restart: always
+    environment:
+      POSTGRES_DB: ${DB_USER_NAME}
+      POSTGRES_USER: ${DB_USER_NAME}
+      POSTGRES_PASSWORD: ${DB_USER_PASSWORD}
