@@ -28,16 +28,17 @@ public class BlogServiceImpl implements BlogService{
     }
 
     @Override
-    public Blogs findBlogById(UUID id) {
-        Optional<Blogs> blog = blogRepository.findById(id);
-        Blogs theBlog = null; //Declare a temporary variable for a specific blog
-        //Check if the ID exists within the database
-        if(blog.isPresent()){
-            theBlog = blog.get();
-        } else {
-            throw new RuntimeException("Blog not found with ID: " + id);
-        }
-        return theBlog;
+    public Optional<Blogs> findBlogById(UUID id) {
+        // Optional<Blogs> blog = blogRepository.findById(id);
+        // Blogs theBlog = null; //Declare a temporary variable for a specific blog
+        // //Check if the ID exists within the database
+        // if(blog.isPresent()){
+        //     theBlog = blog.get();
+        // } else {
+        //     throw new RuntimeException("Blog not found with ID: " + id);
+        // }
+        // return theBlog;
+        return blogRepository.findById(id);
     }
 
     @Override

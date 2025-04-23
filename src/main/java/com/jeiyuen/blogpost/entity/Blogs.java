@@ -1,6 +1,7 @@
 package com.jeiyuen.blogpost.entity;
 
 import java.time.LocalDateTime;
+import java.util.UUID;
 
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
@@ -17,7 +18,7 @@ public class Blogs{
     @Id
     @GeneratedValue(strategy = GenerationType.UUID)
     @Column(name="id", nullable = false, updatable = false)
-    private String uuid;
+    private UUID uuid;
 
     @Column(name="title", nullable= false)
     private String title;
@@ -31,13 +32,10 @@ public class Blogs{
     @Column(name="updated", nullable = false)
     private LocalDateTime updated;
 
-    public String getUuid() {
-        return uuid;
-    }
-
     //Constructors
-    public Blogs(){}
-    public Blogs(String uuid, String title, String author, LocalDateTime creationDate, LocalDateTime updated) {
+    public Blogs() {
+    }
+    public Blogs(UUID uuid, String title, String author, LocalDateTime creationDate, LocalDateTime updated) {
         this.uuid = uuid;
         this.title = title;
         this.author = author;
@@ -46,7 +44,10 @@ public class Blogs{
     }
 
     //Getters and Setters
-    public void setUuid(String uuid) {
+    public UUID getUuid() {
+        return uuid;
+    }
+    public void setUuid(UUID uuid) {
         this.uuid = uuid;
     }
     public String getTitle() {
@@ -73,11 +74,13 @@ public class Blogs{
     public void setUpdated(LocalDateTime updated) {
         this.updated = updated;
     }
-
+    
+    //To String
     @Override
     public String toString() {
         return "Blogs{uuid=" + uuid + ", title=" + title + ", author=" + author + ", creationDate=" + creationDate
-                + ", updated=" + updated + ", getUuid()=" + getUuid() + "}";
+                + ", updated=" + updated + "}";
     }
 
-}
+
+  }
