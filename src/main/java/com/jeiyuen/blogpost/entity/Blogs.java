@@ -1,4 +1,4 @@
-package com.jeiyuen.blogpost.controller;
+package com.jeiyuen.blogpost.entity;
 
 import java.time.LocalDateTime;
 
