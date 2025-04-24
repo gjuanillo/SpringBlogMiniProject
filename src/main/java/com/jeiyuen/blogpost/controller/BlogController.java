@@ -11,6 +11,7 @@ import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
@@ -47,11 +48,11 @@ public class BlogController{
         blog.setUpdated(null);
         return blogService.saveBlog(blog);
     }
-    //
-    // @PutMapping(path="/blogs/{id}")
-    // public Blogs updateBlog(@RequestBody Blogs blog){
-    //     return blogService.saveBlog(blog);
-    // }
+
+    @PutMapping(path="/blogs/{id}")
+    public Blogs updateBlog(@PathVariable UUID id, @RequestBody Blogs blog){
+        return blogService.updateBlog(id, blog);
+    }
     
     @DeleteMapping(path="blogs/{id}")
     public String delete(@PathVariable UUID id){

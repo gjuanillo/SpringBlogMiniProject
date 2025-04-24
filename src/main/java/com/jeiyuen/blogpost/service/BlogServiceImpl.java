@@ -61,18 +61,21 @@ public class BlogServiceImpl implements BlogService{
     
     @Transactional
     @Override
-    public Blogs updateBlog(UUID id, Blogs blogs) {
-        if (null == blogs.getUuid()) {
-            throw new IllegalArgumentException("Blog ID cannot be empty!");
+    public Blogs updateBlog(UUID id, Blogs blog) {
+        if(blog.getTitle() == null){
+            throw new IllegalArgumentException("Title cannot be empty");
         }
-        if (!Objects.equals(blogs.getUuid(), id)) {
-            throw new IllegalArgumentException("Task list ID cannot be changed!");
+        if(blog.getAuthor() == null){
+            throw new IllegalArgumentException("Title cannot be empty");
+        }
+        if (!Objects.equals(blog.getUuid(), id) && blog.getUuid() != null) {
+            throw new IllegalArgumentException("Blog ID cannot be changed!");
         }
         Blogs existingBlog = blogRepository
                 .findById(id)
-                .orElseThrow(() -> new IllegalArgumentException("Task list does not exist!"));
-        existingBlog.setTitle(blogs.getTitle());
-        existingBlog.setAuthor(blogs.getAuthor());
+                .orElseThrow(() -> new IllegalArgumentException("Blog ID does not exist!"));
+        existingBlog.setTitle(blog.getTitle());
+        existingBlog.setAuthor(blog.getAuthor());
         existingBlog.setUpdated(LocalDateTime.now());
         return blogRepository.save(existingBlog);
     }
