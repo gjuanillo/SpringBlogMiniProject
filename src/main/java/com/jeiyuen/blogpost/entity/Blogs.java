@@ -81,7 +81,14 @@ public class Blogs{
     public void setUpdated(LocalDateTime updated) {
         this.updated = updated;
     }
-    
+   
+    public BlogDetails getBlogDetails() {
+        return blogDetails;
+    }
+    public void setBlogDetails(BlogDetails blogDetails) {
+        this.blogDetails = blogDetails;
+    }
+
     //To String
     @Override
     public String toString() {
