@@ -46,5 +46,10 @@ public class BlogDetails{
     public void setBlogContent(String blogContent) {
         this.blogContent = blogContent;
     }
-
+    public Blogs getBlogs() {
+        return blogs;
+    }
+    public void setBlogs(Blogs blogs) {
+        this.blogs = blogs;
+    }
 }
