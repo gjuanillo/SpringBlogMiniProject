@@ -47,6 +47,11 @@ public class BlogController{
         blog.setUpdated(null);
         return blogService.saveBlog(blog);
     }
+    //
+    // @PutMapping(path="/blogs/{id}")
+    // public Blogs updateBlog(@RequestBody Blogs blog){
+    //     return blogService.saveBlog(blog);
+    // }
     
     @DeleteMapping(path="blogs/{id}")
     public String delete(@PathVariable UUID id){

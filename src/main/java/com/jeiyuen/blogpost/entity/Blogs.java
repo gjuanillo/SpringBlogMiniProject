@@ -1,6 +1,7 @@
 package com.jeiyuen.blogpost.entity;
 
 import java.time.LocalDateTime;
+import java.util.Objects;
 import java.util.UUID;
 
 import jakarta.persistence.Column;
@@ -81,6 +82,25 @@ public class Blogs{
         return "Blogs{uuid=" + uuid + ", title=" + title + ", author=" + author + ", creationDate=" + creationDate
                 + ", updated=" + updated + "}";
     }
-
+    @Override
+    public int hashCode() {
+        return Objects.hash(uuid, title, author, creationDate, updated);
+    }
+    @Override
+    public boolean equals(Object obj) {
+        if (this == obj) {
+            return true;
+        }
+        if (obj == null) {
+            return false;
+        }
+        if (getClass() != obj.getClass()) {
+            return false;
+        }
+        Blogs other = (Blogs) obj;
+        return Objects.equals(uuid, other.uuid) && Objects.equals(title, other.title)
+                && Objects.equals(author, other.author) && Objects.equals(creationDate, other.creationDate)
+                && Objects.equals(updated, other.updated);
+    }
 
   }

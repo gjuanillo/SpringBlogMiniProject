@@ -2,6 +2,7 @@ package com.jeiyuen.blogpost.service;
 
 import java.time.LocalDateTime;
 import java.util.List;
+import java.util.Objects;
 import java.util.Optional;
 import java.util.UUID;
 
@@ -44,7 +45,7 @@ public class BlogServiceImpl implements BlogService{
     @Override
     public Blogs saveBlog(Blogs blog) {
         if(blog.getUuid() != null){
-            throw new IllegalArgumentException("Id is already exists");
+            throw new IllegalArgumentException("Id already exists");
         }
         if(blog.getTitle() == null){
             throw new IllegalArgumentException("Title cannot be empty");
@@ -59,6 +60,25 @@ public class BlogServiceImpl implements BlogService{
     }
     
     @Transactional
+    @Override
+    public Blogs updateBlog(UUID id, Blogs blogs) {
+        if (null == blogs.getUuid()) {
+            throw new IllegalArgumentException("Blog ID cannot be empty!");
+        }
+        if (!Objects.equals(blogs.getUuid(), id)) {
+            throw new IllegalArgumentException("Task list ID cannot be changed!");
+        }
+        Blogs existingBlog = blogRepository
+                .findById(id)
+                .orElseThrow(() -> new IllegalArgumentException("Task list does not exist!"));
+        existingBlog.setTitle(blogs.getTitle());
+        existingBlog.setAuthor(blogs.getAuthor());
+        existingBlog.setUpdated(LocalDateTime.now());
+        return blogRepository.save(existingBlog);
+    }
+
+
+
     @Override
     public void deleteBlog(UUID id) {
         blogRepository.deleteById(id);

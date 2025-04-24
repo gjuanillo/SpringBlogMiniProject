@@ -11,6 +11,7 @@ public interface BlogService{
     List<Blogs> findall();
     Optional<Blogs> findBlogById(UUID id);
     Blogs saveBlog(Blogs blog);
+    Blogs updateBlog(UUID id, Blogs blog);
     void deleteBlog(UUID id);
 
 }
