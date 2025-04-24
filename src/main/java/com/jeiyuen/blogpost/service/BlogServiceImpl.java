@@ -62,13 +62,14 @@ public class BlogServiceImpl implements BlogService{
     @Transactional
     @Override
     public Blogs updateBlog(UUID id, Blogs blog) {
-        if(blog.getTitle() == null){
+        //Verify Request
+        if(blog.getTitle() == null){ //verify if title is empty
             throw new IllegalArgumentException("Title cannot be empty");
         }
-        if(blog.getAuthor() == null){
-            throw new IllegalArgumentException("Title cannot be empty");
+        if(blog.getAuthor() == null){ //verify if author is empty
+            throw new IllegalArgumentException("Author cannot be empty");
         }
-        if (!Objects.equals(blog.getUuid(), id) && blog.getUuid() != null) {
+        if (!Objects.equals(blog.getUuid(), id) && blog.getUuid() != null) { //verify if there's an attempt to change UUID
             throw new IllegalArgumentException("Blog ID cannot be changed!");
         }
         Blogs existingBlog = blogRepository
