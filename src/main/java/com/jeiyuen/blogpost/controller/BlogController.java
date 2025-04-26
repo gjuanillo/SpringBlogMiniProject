@@ -27,11 +27,14 @@ public class BlogController{
         blogService = theBlogService;
     }
 
+
+    //List blogs excluding details (title, author, created, updated)
     @GetMapping(path="/blogs")
     public List<Blogs> findAll(){
         return blogService.findall();
     }
 
+    //Show specific blogs with details (title, author, created, updated, blog content, media)
     @GetMapping(path="/blogs/{id}")
     public Optional<Blogs> findById(@PathVariable UUID id){
         Optional<Blogs> blog = blogService.findBlogById(id);
@@ -41,6 +44,7 @@ public class BlogController{
         return blog;
     }
 
+    //Create Blog (request for title, author, blog content, media)
     @PostMapping(path="/blogs")
     public Blogs createBlog(@RequestBody Blogs blog){
         blog.setUuid(null);
@@ -49,11 +53,14 @@ public class BlogController{
         return blogService.saveBlog(blog);
     }
 
+    //Update blog 
+    //TODO Change to PATCH METHOD 
     @PutMapping(path="/blogs/{id}")
     public Blogs updateBlog(@PathVariable UUID id, @RequestBody Blogs blog){
         return blogService.updateBlog(id, blog);
     }
     
+    //Delete blog by ID
     @DeleteMapping(path="blogs/{id}")
     public String delete(@PathVariable UUID id){
         Optional<Blogs> blog = blogService.findBlogById(id);
