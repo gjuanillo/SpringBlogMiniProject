@@ -3,8 +3,10 @@ package com.jeiyuen.blogpost.service;
 import java.time.LocalDateTime;
 import java.util.List;
 import java.util.UUID;
+import java.util.stream.Collectors;
 
 import com.jeiyuen.blogpost.dto.BlogDTO;
+import com.jeiyuen.blogpost.dto.BlogHeaderDTO;
 import com.jeiyuen.blogpost.dto.BlogUpdateDTO;
 import com.jeiyuen.blogpost.entity.Blogs;
 import com.jeiyuen.blogpost.mapper.BlogMapper;
@@ -26,9 +28,9 @@ public class BlogServiceImpl implements BlogService{
     }
 
     @Override
-    public List<BlogDTO> findall() {
+    public List<BlogHeaderDTO> findall() {
         return blogRepository.findAllByOrderByUpdatedDesc()
-            .stream().map(blogMapper::toDto).toList();
+            .stream().map(blogMapper::toHeaderDto).collect(Collectors.toList());
     }
 
     @Override

@@ -4,12 +4,13 @@ import java.util.List;
 import java.util.UUID;
 
 import com.jeiyuen.blogpost.dto.BlogDTO;
+import com.jeiyuen.blogpost.dto.BlogHeaderDTO;
 import com.jeiyuen.blogpost.dto.BlogUpdateDTO;
 
 public interface BlogService{
 
     //Find Blogs excluding details
-    List<BlogDTO> findall();
+    List<BlogHeaderDTO> findall();
     //Find Blog by ID, including details
     BlogDTO findBlogById(UUID id);
     //Save Blog on creation
