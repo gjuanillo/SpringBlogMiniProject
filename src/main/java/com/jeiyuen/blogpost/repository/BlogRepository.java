@@ -1,4 +1,4 @@
-package com.jeiyuen.blogpost.dao;
+package com.jeiyuen.blogpost.repository;
 
 import java.util.List;
 import java.util.UUID;

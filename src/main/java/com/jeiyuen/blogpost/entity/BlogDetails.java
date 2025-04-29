@@ -12,7 +12,7 @@ import jakarta.persistence.OneToOne;
 import jakarta.persistence.Table;
 
 @Entity
-@Table(name="blog-details")
+@Table(name="blog_details")
 public class BlogDetails{
 
 
@@ -20,7 +20,7 @@ public class BlogDetails{
     @Column(name="id", nullable = false, updatable = false)
     private UUID uuid;
 
-    @Column(name="blog-content")
+    @Column(name="blog_content")
     private String blogContent;
 
     @OneToOne(fetch = FetchType.LAZY)

@@ -30,7 +30,7 @@ public class Blogs{
     @Column(name="author", nullable = false)
     private String author;
     
-    @OneToOne(mappedBy="blogs", fetch = FetchType.LAZY, cascade=CascadeType.ALL)
+    @OneToOne(mappedBy="blogs", fetch = FetchType.LAZY, cascade=CascadeType.ALL, orphanRemoval = true)
     private BlogDetails blogDetails;
 
     @Column(name="creation_date", nullable = false, updatable = false)

@@ -3,8 +3,8 @@ package com.jeiyuen.blogpost.service;
 import java.util.Optional;
 import java.util.UUID;
 
-import com.jeiyuen.blogpost.dao.BlogDetailsRepository;
 import com.jeiyuen.blogpost.entity.BlogDetails;
+import com.jeiyuen.blogpost.repository.BlogDetailsRepository;
 
 public class BlogDetailsServiceImpl implements BlogDetailsService{
 

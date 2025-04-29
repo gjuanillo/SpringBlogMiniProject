@@ -1,0 +1,51 @@
+package com.jeiyuen.blogpost.mapper;
+
+import java.time.LocalDateTime;
+
+import com.jeiyuen.blogpost.dto.BlogDTO;
+import com.jeiyuen.blogpost.dto.BlogUpdateDTO;
+import com.jeiyuen.blogpost.entity.BlogDetails;
+import com.jeiyuen.blogpost.entity.Blogs;
+
+import org.springframework.stereotype.Component;
+
+@Component
+public class BlogMapper {
+
+    public BlogDTO toDto(Blogs blog) {
+        BlogDTO dto = new BlogDTO();
+        dto.setUuid(blog.getUuid());
+        dto.setTitle(blog.getTitle());
+        dto.setAuthor(blog.getAuthor());
+        if (blog.getBlogDetails() != null) {
+            dto.setBlogContent(blog.getBlogDetails().getBlogContent());
+        }
+        return dto;
+    }
+
+    public Blogs toEntity(BlogDTO dto) {
+        Blogs blog = new Blogs();
+        blog.setUuid(dto.getUuid());
+        blog.setTitle(dto.getTitle());
+        blog.setAuthor(dto.getAuthor());
+        
+        BlogDetails details = new BlogDetails();
+        details.setBlogContent(dto.getBlogContent());
+        details.setBlogs(blog);
+        blog.setBlogDetails(details);
+        blog.setCreationDate(LocalDateTime.now());
+        blog.setUpdated(LocalDateTime.now());
+        details.setBlogs(blog);
+
+        return blog;
+    }
+
+    public void updateEntity(Blogs blog, BlogUpdateDTO dto){
+        if (dto.getTitle() != null) {blog.setTitle(dto.getTitle());}
+        if (dto.getAuthor() != null) {blog.setAuthor(dto.getAuthor());}
+        if (dto.getBlogContent() != null && blog.getBlogDetails() != null) {
+            blog.getBlogDetails().setBlogContent(dto.getBlogContent());
+        }
+        blog.setUpdated(LocalDateTime.now());
+    }
+}

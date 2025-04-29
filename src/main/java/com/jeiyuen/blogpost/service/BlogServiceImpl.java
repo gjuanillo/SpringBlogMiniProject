@@ -6,8 +6,8 @@ import java.util.Objects;
 import java.util.Optional;
 import java.util.UUID;
 
-import com.jeiyuen.blogpost.dao.BlogRepository;
 import com.jeiyuen.blogpost.entity.Blogs;
+import com.jeiyuen.blogpost.repository.BlogRepository;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
