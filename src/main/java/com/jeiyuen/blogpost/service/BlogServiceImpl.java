@@ -41,6 +41,9 @@ public class BlogServiceImpl implements BlogService{
 
     @Override
     public BlogDTO saveBlog(BlogDTO dto) {
+        if (dto.getUuid() != null) {
+            throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "UUID is automatically generated, cannot assign UUID");
+        }
         Blogs blog = blogMapper.toEntity(dto);
         blog.setCreationDate(LocalDateTime.now());
         blog.setUpdated(LocalDateTime.now());

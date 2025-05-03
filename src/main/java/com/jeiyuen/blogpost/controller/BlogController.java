@@ -3,6 +3,8 @@ package com.jeiyuen.blogpost.controller;
 import java.util.List;
 import java.util.UUID;
 
+import jakarta.validation.Valid;
+
 import com.jeiyuen.blogpost.dto.BlogDTO;
 import com.jeiyuen.blogpost.dto.BlogHeaderDTO;
 import com.jeiyuen.blogpost.dto.BlogUpdateDTO;
@@ -46,14 +48,14 @@ public class BlogController {
 
     // Create Blog
     @PostMapping
-    public ResponseEntity<BlogDTO> createBlog(@RequestBody BlogDTO dto) {
+    public ResponseEntity<BlogDTO> createBlog(@Valid @RequestBody BlogDTO dto) {
         BlogDTO created = blogService.saveBlog(dto);
         return new ResponseEntity<>(created, HttpStatus.CREATED);
     }
 
     // Update blog
     @PatchMapping(path = "/{id}")
-    public ResponseEntity<BlogDTO> updateBlog(@PathVariable UUID id, @RequestBody BlogUpdateDTO dto) {
+    public ResponseEntity<BlogDTO> updateBlog(@PathVariable UUID id, @Valid @RequestBody BlogUpdateDTO dto) {
         BlogDTO updated = blogService.updateBlog(id, dto);
         return new ResponseEntity<>(updated, HttpStatus.OK);
     }

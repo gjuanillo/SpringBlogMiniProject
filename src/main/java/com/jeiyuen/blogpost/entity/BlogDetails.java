@@ -20,7 +20,7 @@ public class BlogDetails{
     @Column(name="id", nullable = false, updatable = false)
     private UUID uuid;
 
-    @Column(name="blog_content")
+    @Column(name="blog_content", length = 5000)
     private String blogContent;
 
     @OneToOne(fetch = FetchType.LAZY)

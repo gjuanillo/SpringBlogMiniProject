@@ -2,11 +2,19 @@ package com.jeiyuen.blogpost.dto;
 
 import java.util.UUID;
 
+import jakarta.validation.constraints.NotBlank;
+import jakarta.validation.constraints.Size;
+
 public class BlogDTO {
 
     private UUID uuid;
+    @NotBlank(message = "Title is required!")
+    @Size(max = 100, message = "Title cannot be longer than 100 characters!")
     private String title;
+    @NotBlank(message="Author is required!")
+    @Size(max= 50, message = "Author cannot be longer than 50 characters!")
     private String author;
+    @NotBlank(message="Content cannot be empoty!")
     private String blogContent;
 
     public BlogDTO() {
