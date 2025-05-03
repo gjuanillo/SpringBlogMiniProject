@@ -9,12 +9,12 @@ import com.jeiyuen.blogpost.dto.BlogDTO;
 import com.jeiyuen.blogpost.dto.BlogHeaderDTO;
 import com.jeiyuen.blogpost.dto.BlogUpdateDTO;
 import com.jeiyuen.blogpost.entity.Blogs;
+import com.jeiyuen.blogpost.exceptions.ApiException;
+import com.jeiyuen.blogpost.exceptions.ResourceNotFoundException;
 import com.jeiyuen.blogpost.mapper.BlogMapper;
 import com.jeiyuen.blogpost.repository.BlogRepository;
 
-import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
-import org.springframework.web.server.ResponseStatusException;
 
 @Service
 public class BlogServiceImpl implements BlogService{
@@ -36,13 +36,13 @@ public class BlogServiceImpl implements BlogService{
     @Override
     public BlogDTO findBlogById(UUID id) {
         return blogRepository.findById(id).map(blogMapper::toDto)
-            .orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND, "Blog not found"));
+            .orElseThrow(() -> new ResourceNotFoundException("Blog", "blogId", id));
     }
 
     @Override
     public BlogDTO saveBlog(BlogDTO dto) {
         if (dto.getUuid() != null) {
-            throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "UUID is automatically generated, cannot assign UUID");
+            throw new ApiException("UUID is autoamtically generated, cannot assign UUID"); 
         }
         dto.setCreated(LocalDateTime.now());
         dto.setUpdated(LocalDateTime.now());
@@ -54,7 +54,7 @@ public class BlogServiceImpl implements BlogService{
     @Override
     public BlogDTO updateBlog(UUID id, BlogUpdateDTO dto) {
         Blogs blog = blogRepository.findById(id)
-            .orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND, "Blog with ID " + id + " does not exists!"));
+            .orElseThrow(() -> new ResourceNotFoundException("Blog", "blogID", id));
         blogMapper.updateEntity(blog, dto);
         Blogs updated = blogRepository.save(blog);
         return blogMapper.toDto(updated);
@@ -64,7 +64,7 @@ public class BlogServiceImpl implements BlogService{
     @Override
     public void deleteBlog(UUID id) {
         Blogs blog = blogRepository.findById(id)
-            .orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND, "Blog with ID " + id + " does not exists!"));
+            .orElseThrow(() -> new ResourceNotFoundException("Blog", "blogID", id));
         blogRepository.delete(blog);
     }
 
