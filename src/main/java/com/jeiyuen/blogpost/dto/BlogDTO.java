@@ -1,5 +1,6 @@
 package com.jeiyuen.blogpost.dto;
 
+import java.time.LocalDateTime;
 import java.util.UUID;
 
 import jakarta.validation.constraints.NotBlank;
@@ -16,15 +17,19 @@ public class BlogDTO {
     private String author;
     @NotBlank(message="Content cannot be empoty!")
     private String blogContent;
+    private LocalDateTime created;
+    private LocalDateTime updated;
 
     public BlogDTO() {
     }
 
-    public BlogDTO(UUID uuid, String title, String author, String blogContent) {
+    public BlogDTO(UUID uuid, String title, String author, String blogContent, LocalDateTime created, LocalDateTime updated) {
         this.uuid = uuid;
         this.title = title;
         this.author = author;
         this.blogContent = blogContent;
+        this.created = created;
+        this.updated = updated;
     }
 
     public UUID getUuid() {
@@ -57,6 +62,22 @@ public class BlogDTO {
 
     public void setBlogContent(String blogContent) {
         this.blogContent = blogContent;
+    }
+
+    public LocalDateTime getCreated() {
+        return created;
+    }
+
+    public void setCreated(LocalDateTime created) {
+        this.created = created;
+    }
+
+    public LocalDateTime getUpdated() {
+        return updated;
+    }
+
+    public void setUpdated(LocalDateTime updated) {
+        this.updated = updated;
     }
 
 }

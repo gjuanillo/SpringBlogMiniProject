@@ -19,6 +19,8 @@ public class BlogMapper {
         dto.setUuid(blog.getUuid());
         dto.setTitle(blog.getTitle());
         dto.setAuthor(blog.getAuthor());
+        dto.setCreated(blog.getCreationDate());
+        dto.setUpdated(blog.getUpdated());
         if (blog.getBlogDetails() != null) {
             dto.setBlogContent(blog.getBlogDetails().getBlogContent());
         }
@@ -31,13 +33,13 @@ public class BlogMapper {
         blog.setUuid(dto.getUuid());
         blog.setTitle(dto.getTitle());
         blog.setAuthor(dto.getAuthor());
+        blog.setCreationDate(dto.getCreated());
+        blog.setUpdated(dto.getUpdated());
 
         BlogDetails details = new BlogDetails();
         details.setBlogContent(dto.getBlogContent());
         details.setBlogs(blog);
         blog.setBlogDetails(details);
-        blog.setCreationDate(LocalDateTime.now());
-        blog.setUpdated(LocalDateTime.now());
         details.setBlogs(blog);
 
         return blog;
@@ -62,6 +64,8 @@ public class BlogMapper {
         header.setUuid(blog.getUuid());
         header.setTitle(blog.getTitle());
         header.setAuthor(blog.getAuthor());
+        header.setCreated(blog.getCreationDate());
+        header.setUpdated(blog.getUpdated());
         return header;
     }
 }
